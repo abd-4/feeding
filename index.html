@@ -78,11 +78,24 @@
     <!-- Calorie Calculator Section -->
     <section id="calculator" class="calculator-section">
         <div class="container">
-            <h2 class="section-title">حاسبة السعرات الحرارية أثناء السكون (BMR)</h2>
-            <p class="section-subtitle">احسب السعرات الدقيقة التي يحرقها جسمك في حالة الراحة التامة وفق المعايير العالمية.</p>
+            <h2 class="section-title">حاسبة السعرات الحرارية والاحتياج اليومي</h2>
+            <p class="section-subtitle">احسب السعرات الدقيقة لجسمك بناءً على معدل الأيض ومستوى نشاطك البدني.</p>
             
             <div class="calculator-card">
                 <form id="bmrForm">
+                    <!-- خيار مستوى النشاط فوق خيار الجنس تماماً -->
+                    <div class="form-group">
+                        <label for="activity">مستوى النشاط البدني:</label>
+                        <select id="activity" required>
+                            <option value="1.0">سعرات الحالة السكونية: بدون أي نشاط مطلقاً</option>
+                            <option value="1.2">خامل: قليل الحركة أو دون تمارين</option>
+                            <option value="1.375">نشاط خفيف: تمارين خفيفة من يوم إلى 3 أيام أسبوعياً</option>
+                            <option value="1.55">نشاط متوسط: تمارين من 3 إلى 5 أيام أسبوعياً</option>
+                            <option value="1.725">نشاط مرتفع: تمارين قوية من 6 إلى 7 أيام أسبوعياً</option>
+                            <option value="1.9">نشاط مرتفع جداً: تمارين شديدة جداً أو عمل بدني شاق</option>
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label for="gender">الجنس:</label>
                         <select id="gender" required>
@@ -106,14 +119,14 @@
                         <input type="number" id="age" placeholder="مثال: 25" required>
                     </div>
 
-                    <button type="button" onclick="calculateBMR()" class="btn btn-primary calc-btn">احسب سعرات السكون</button>
+                    <button type="button" onclick="calculateCalories()" class="btn btn-primary calc-btn">احسب السعرات الحرارية</button>
                 </form>
 
                 <div id="resultBox" class="result-box" style="display: none;">
                     <h3>نتيجتك الدقيقة:</h3>
-                    <p>جسمك يحتاج وهو ساكن (بدون أي حركة) إلى:</p>
+                    <p>إجمالي سعراتك الحرارية المطلوبة بناءً على نشاطك اليومي:</p>
                     <div id="caloriesResult" class="calories-number">0</div>
-                    <span>سعرة حرارية / يومياً (BMR)</span>
+                    <span>سعرة حرارية / يومياً</span>
                 </div>
             </div>
         </div>
@@ -162,11 +175,12 @@
 
     <!-- Calculator JavaScript Script -->
     <script>
-        function calculateBMR() {
+        function calculateCalories() {
             const gender = document.getElementById('gender').value;
             const weight = parseFloat(document.getElementById('weight').value);
             const height = parseFloat(document.getElementById('height').value);
             const age = parseInt(document.getElementById('age').value);
+            const activityMultiplier = parseFloat(document.getElementById('activity').value);
 
             if (!weight || !height || !age) {
                 alert('يرجى تعبئة جميع الحقول بشكل صحيح.');
@@ -174,14 +188,17 @@
             }
 
             let bmr = 0;
-            // معادلة Mifflin-St Jeor العالمية الدقيقة لحساب السعرات في حالة السكون التام
+            // معادلة Mifflin-St Jeor العالمية لحساب السعرات في حالة السكون التام
             if (gender === 'male') {
                 bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
             } else {
                 bmr = (10 * weight) + (6.25 * height) - (5 * age) - 161;
             }
 
-            document.getElementById('caloriesResult').innerText = Math.round(bmr);
+            // ضرب نتيجة السكون بمعامل النشاط البدني المختار
+            const totalCalories = bmr * activityMultiplier;
+
+            document.getElementById('caloriesResult').innerText = Math.round(totalCalories);
             document.getElementById('resultBox').style.display = 'block';
         }
     </script>
