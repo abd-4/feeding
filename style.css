@@ -116,6 +116,8 @@ body {
     text-decoration: none;
     font-weight: 700;
     transition: 0.3s;
+    cursor: pointer;
+    border: none;
 }
 
 .btn-primary {
@@ -141,6 +143,12 @@ body {
     text-align: center;
     font-size: 2rem;
     color: var(--dark);
+    margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #64748b;
     margin-bottom: 2.5rem;
 }
 
@@ -186,6 +194,78 @@ body {
     color: var(--primary);
     display: inline-block;
     margin-top: 1rem;
+    background: transparent;
+}
+
+/* Calculator Section Styles */
+.calculator-section {
+    padding: 4rem 0;
+    background-color: #ffffff;
+}
+
+.calculator-card {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--light);
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    border: 1px solid #e2e8f0;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: var(--white);
+    color: var(--text);
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-group input:focus, .form-group select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+.calc-btn {
+    width: 100%;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+}
+
+.result-box {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #ecfdf5;
+    border: 2px solid #10b981;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.result-box h3 {
+    color: var(--primary-dark);
+    margin-bottom: 0.3rem;
+}
+
+.calories-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary-dark);
+    margin: 0.5rem 0 0;
 }
 
 /* Footer */
@@ -206,9 +286,12 @@ footer {
 /* Responsive design */
 @media (max-width: 768px) {
     .nav-links {
-        display: none; /* يمكن إضافة قائمة جانبية بسيطة للموبايل */
+        display: none; 
     }
     .hero h1 {
         font-size: 1.8rem;
+    }
+    .calculator-card {
+        padding: 1.5rem;
     }
 }
